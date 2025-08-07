@@ -25,10 +25,10 @@
             <artifactId>wiki-common</artifactId>
         </dependency>
 
-        <!-- 引入generator -->
+        <!-- 引入service -->
         <dependency>
             <groupId>com.wiki</groupId>
-            <artifactId>wiki-generator</artifactId>
+            <artifactId>wiki-service</artifactId>
         </dependency>
 
     </dependencies>

@@ -1,6 +1,8 @@
 package com.wiki.core.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -12,12 +14,14 @@ import java.time.LocalDateTime;
  * 还包含逻辑删除字段和租户ID字段，适用于多租户场景。
  * </p>
  *
+ * @author zhuningkang
  * @BelongsProject: wiki
  * @BelongsPackage: com.wiki.core.entity
  */
+@Setter
+@Getter
 public class BaseEntity implements Serializable {
 
-    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     @TableField(fill = FieldFill.INSERT)
@@ -34,90 +38,11 @@ public class BaseEntity implements Serializable {
 
     private String updateBy;
 
+    @TableField(fill = FieldFill.INSERT)
+    @TableLogic
     private Boolean isDeleted;
 
-    @TableLogic
     private Long tenantId;
 
     private int version;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public Long getCreateById() {
-        return createById;
-    }
-
-    public void setCreateById(Long createById) {
-        this.createById = createById;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Long getUpdateById() {
-        return updateById;
-    }
-
-    public void setUpdateById(Long updateById) {
-        this.updateById = updateById;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    public Long getTenantId() {
-        return tenantId;
-    }
-
-    public void setTenantId(Long tenantId) {
-        this.tenantId = tenantId;
-    }
-
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
 }

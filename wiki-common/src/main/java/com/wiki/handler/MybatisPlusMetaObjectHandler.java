@@ -3,6 +3,7 @@ package com.wiki.handler;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
  * @Description: 配置mybatis-plus处理器
  * @Version: 1.0
  */
+@Component
 public class MybatisPlusMetaObjectHandler implements MetaObjectHandler {
 
     // 是否启用登录用户相关字段自动填充
@@ -32,14 +34,12 @@ public class MybatisPlusMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         // 填充创建时间和更新时间
         this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now());
-        this.strictInsertFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
+        this.strictInsertFill(metaObject, "isDeleted", Boolean.class, false);
 
         // 如果启用登录用户相关字段，填充创建/更新人信息
         if (Boolean.TRUE.equals(login)) {
             this.strictInsertFill(metaObject, "createById", LocalDateTime.class, LocalDateTime.now());
             this.strictInsertFill(metaObject, "createBy", LocalDateTime.class, LocalDateTime.now());
-            this.strictInsertFill(metaObject, "updateById", LocalDateTime.class, LocalDateTime.now());
-            this.strictInsertFill(metaObject, "updateBy", LocalDateTime.class, LocalDateTime.now());
         }
     }
 
