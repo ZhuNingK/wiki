@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: develop
+  cache:
+    redis:
+      enable-statistics: true
+  #停机超过30秒自动关闭
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  main:
+    allow-circular-references: true
