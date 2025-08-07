@@ -55,3 +55,9 @@
  2. role 角色信息
  3. menu 菜单信息
 ```
+### auth2.0
+
+```Tip
+ 使用 Spring Security OAuth2 实现认证和授权。
+ 引入sa-token 作为权限认证框架。
+```

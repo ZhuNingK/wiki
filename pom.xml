@@ -31,6 +31,7 @@
         <guava.version>33.4.0-jre</guava.version>
         <mybatis-plus.version>3.5.12</mybatis-plus.version>
         <easyexcel.verion>3.3.3</easyexcel.verion>
+        <bcprov.verson>1.69</bcprov.verson>
     </properties>
 
     <dependencyManagement>
@@ -115,6 +116,13 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>easyexcel</artifactId>
                 <version>${easyexcel.verion}</version>
+            </dependency>
+
+            <!-- 国密sm4 -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15to18</artifactId>
+                <version>${bcprov.verson}</version>
             </dependency>
 
             <!-- 引入common -->
