@@ -17,9 +17,9 @@
 │   ├── wiki-common       # 公共模块
 │   ├── wiki-generator    # 代码生成模块
 │   ├── wiki-service      # 服务模块    
-│   ├── wiki-auth         # 认证模块
-│   ├── wiki-member       # 用户模块
-│   └── web               # 前端模块
+│   ├── wiki-member       # 会员模块
+│   ├── webapp            # 前端模块
+│   ├── web-admin         # 管理端前端模块
 ```
 ## wiki-generator
 ```Tip
@@ -31,4 +31,9 @@
 ## wiki-common
 ```Tip
  公共模块，包含一些公共的工具类和配置。
+```
+
+## wiki-s r
+```Tip
+ 服务模块，包含业务逻辑和数据访问层。
 ```

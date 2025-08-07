@@ -12,6 +12,8 @@
         <module>wiki-generator</module>
         <module>wiki-common</module>
         <module>wiki-admin</module>
+        <module>wiki-service</module>
+        <module>wiki-member</module>
     </modules>
 
     <properties>

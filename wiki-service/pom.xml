@@ -7,10 +7,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>wiki-admin</artifactId>
+    <artifactId>wiki-service</artifactId>
     <packaging>jar</packaging>
 
-    <name>wiki-admin</name>
+    <name>wiki-server</name>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -24,12 +24,5 @@
             <groupId>com.wiki</groupId>
             <artifactId>wiki-common</artifactId>
         </dependency>
-
-        <!-- 引入generator -->
-        <dependency>
-            <groupId>com.wiki</groupId>
-            <artifactId>wiki-generator</artifactId>
-        </dependency>
-
     </dependencies>
 </project>
