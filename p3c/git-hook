@@ -1,0 +1,85 @@
+#!/bin/sh
+#author: plator
+#email: platordream@gmail.com
+
+isScanAll=0
+min=5
+igFilePath="./p3c/ignore"
+
+#begin commit operate
+scanFile=""
+ignoreFile=($(cat $igFilePath))
+
+if [[ $isScanAll -eq 1 ]]
+then
+	scanFile="."
+	scanFile+=" -ignorelist $igFilePath "
+fi
+
+if [[ $isScanAll -eq 0 ]]
+then
+	editList=(`git diff --staged --name-only --diff-filter=AM`)
+	editLen=${#editList[@]}
+
+	if [[ $editLen -eq 0 ]]
+	then
+	  echo "It not found edit!"
+	  exit 0
+	fi
+
+	len=${#ignoreFile[@]}
+
+	for element in ${editList[@]}
+	do
+		eleExt="${element##*.}"
+		if [[ ! -n $eleExt || $eleExt != "java" ]]
+		then
+			continue
+		fi
+		if [[ $len -gt 0 ]]
+		then
+		    sFile=""
+			for ig in ${ignoreFile[@]}
+			do
+			  ig=$(echo $ig)
+			  ig=${ig%*,}
+			  if [[ $ig == *$element* ]]
+			  then
+				echo "ignore file:"$element
+				sFile=""
+				break
+			  else
+				sFile=$element","
+			  fi
+			done
+			scanFile+=$sFile
+		else
+			scanFile+="./"$element","
+		fi
+	done
+
+	scanFile=${scanFile%*,}
+	echo "scan file:"
+	echo $scanFile
+fi
+
+if [[ ! -n $scanFile ]]
+then
+    echo "all ignored"
+	exit 0
+fi
+
+jar_path="./p3c/p3c-pmd-2.1.1.jar";
+rules="rulesets/java/ali-comment.xml,rulesets/java/ali-comment.xml,rulesets/java/ali-concurrent.xml,rulesets/java/ali-constant.xml,rulesets/java/ali-flowcontrol.xml,rulesets/java/ali-naming.xml"
+#echo "请查看项目根目录下的p3c.html文件修改问题，或者安装阿里的p3c插件"
+echo please see project root dir p3c.html file,or install alibaba p3c plugin
+java -cp $jar_path  net.sourceforge.pmd.PMD -d $scanFile -R $rules -f html -min $min -reportfile ./p3c.html
+
+reject=$?
+if [[ $reject -gt 0 ]]
+then
+	echo "提交失败,请查看根目录下p3c.html文件"
+	echo "commit failed, please see project boot dir p3c.html file"
+	exit 1;
+fi
+exit $reject
